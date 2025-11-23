@@ -43,6 +43,11 @@ app.use(
       } else if (path.match(/\.(bin|dat|exe|dll|so|dylib)$/)) {
         // Binary files also get long cache with immutable
         res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+      } else if (
+        path.match(/\.(webp|png|jpg|jpeg|gif|ico|woff|woff2|ttf|eot|otf)$/)
+      ) {
+        // Images and fonts get long cache with immutable for better performance
+        res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
       }
       // Other file types use the default maxAge setting
     },
